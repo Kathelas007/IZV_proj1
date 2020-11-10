@@ -9,6 +9,10 @@ import os.path
 
 
 def process_data(data_source):
+    """
+    Fnc separates date and region from whole data set and for each sets count
+    :return: 2D array of counts for each year and region
+    """
     date_coll = np.array([row[0].year for row in data_source[1]])
     reg_coll = np.array([row[-1] for row in data_source[1]])
 
@@ -21,6 +25,12 @@ def process_data(data_source):
 
 
 def annotate_bars(rects, ax, df):
+    """
+    Fnc annotates created bar plot by oder of bars
+    :param rects: rectangles in plot
+    :param ax: current axes
+    :param df: data set
+    """
     arg_sort = np.argsort(df)
     indexes = [0] * len(df)
 
@@ -37,6 +47,11 @@ def annotate_bars(rects, ax, df):
 
 
 def get_fig(years, regs, df):
+    """
+    Fnc creates figure with 6 subplots for each year
+    :param df: data set
+    :return: created figure
+    """
     fig = plt.figure(figsize=(8.27, 11.69))
     fig.suptitle("Přehled nehodovosti v krajích za rok 2016-2020", fontsize=16, fontweight='bold')
 
@@ -67,6 +82,12 @@ def get_fig(years, regs, df):
 
 
 def plot_stat(data_source, fig_location=None, show_figure=False):
+    """
+    Fnc plots number of accidents for each year and region
+    :param data_source: all data
+    :param fig_location: where to store figure
+    :param show_figure: show figure
+    """
     colls_year, rows_reg, df = process_data(data_source)
     fig = get_fig(colls_year, rows_reg, df)
 
